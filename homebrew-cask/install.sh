@@ -15,5 +15,6 @@ cask install dropbox
 cask install iterm2
 cask install flux
 cask install bettertouchtool
+cask install crashplan
 
 echo "Installed cask dependencies"

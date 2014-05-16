@@ -21,6 +21,3 @@ chflags nohidden ~/Library
 
 # Set a really fast key repeat.
 defaults write NSGlobalDomain KeyRepeat -int 0
-
-# Hide Safari's bookmark bar.
-# defaults write com.apple.Safari ShowFavoritesBar -bool false
