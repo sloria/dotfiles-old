@@ -1,0 +1,9 @@
+update
+
+# Common packages to install with brew
+install zsh
+install git
+install tree
+install z
+
+cleanup

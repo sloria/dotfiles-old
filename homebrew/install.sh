@@ -12,7 +12,10 @@ then
   ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" > /tmp/homebrew-install.log
 fi
 
-# Install homebrew packages
-brew install git tree z
+# Link the Brewfile
+ln -s $ZSH/homebrew/Brewfile ~/Brewfile
+
+# install dependencies in Brewfile
+brew bundle ~/Brewfile
 
 exit 0
