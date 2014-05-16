@@ -15,6 +15,16 @@ cd ~/.dotfiles
 script/bootstrap
 ```
 
+## updating
+
+To handle installation and updates, run
+
+```sh
+dot
+```
+
+Run this command occasionally to keep up to date
+
 ## components
 
 
