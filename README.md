@@ -1,9 +1,12 @@
 # sloria does dotfiles
 
-## Requirements:
+My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
+
+## prerequisites
 
 - homebrew
 - git
+- zsh
 
 ## install
 
@@ -15,6 +18,10 @@ cd ~/.dotfiles
 script/bootstrap
 ```
 
+### sublime text
+
+For now, Sublime Text preferences and package installation is manual. Just copy sublime3/Preferences.sublime-settings to your User settings.
+
 ## updating
 
 To handle installation and updates, run
@@ -23,10 +30,9 @@ To handle installation and updates, run
 dot
 ```
 
-Run this command occasionally to keep up to date
+Run this command occasionally to keep up to date.
 
 ## components
-
 
 - **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
   available everywhere.
@@ -40,3 +46,4 @@ Run this command occasionally to keep up to date
   your `$HOME`. This is so you can keep all of those versioned in your dotfiles
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
+- **topic/install.sh**: Topic-specific installation script. These will execute when you run `script/bootstrap` or `script/install` or `dot`
