@@ -10,8 +10,10 @@ brew install brew-cask
 
 alias cask="brew cask"
 
-cask install google-chrome 
-cask install dropbox 
+cask install google-chrome
+cask install dropbox
 cask install iterm2
 cask install flux
+cask install bettertouchtool
+
 echo "Installed cask dependencies"
