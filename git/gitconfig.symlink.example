@@ -7,20 +7,38 @@
         name = AUTHORNAME
         email = AUTHOREMAIL
 [credential]
-        helper = GIT_CREDENTIAL_HELPER
+        helper = cache
 [alias]
+        st = status
         co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributors = !$ZSH/bin/git-rank-contributors
-        count   = !git shortlog -sn
+        ci = commit
+        br = branch
+        df = diff
+        dfs = diff --staged
+        logg = log --graph --decorate --oneline --abbrev-commit --all
+        pup = pull upstream
+        shorg = push -u origin
+        switch = !legit switch \"$@\"
+        branches = !legit branches
+        sprout = !legit sprout \"$@\"
+        unpublish = !legit unpublish \"$@\"
+        harvest = !legit harvest \"$@\"
+        sync = !legit sync \"$@\"
+        publish = !legit publish \"$@\"
+        graft = !legit graft \"$@\"
+        f = flow
+        pl = pull
+        nuke = delete-branch
+        fublish = flow feature publish
+        fart = flow feature start
+        fix = flow hotfix start
 [color]
         diff = auto
         status = auto
         branch = auto
         ui = true
 [core]
-        excludesfile = ~/.gitignore
+        excludesfile = ~/.gitignore_global
         editor = vim
 [apply]
         whitespace = nowarn
