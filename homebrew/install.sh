@@ -13,6 +13,6 @@ then
 fi
 
 # Install homebrew packages
-brew install git tree
+brew install git tree z
 
 exit 0
