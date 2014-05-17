@@ -8,23 +8,20 @@ bind r \
     source-file ~/.tmux.conf \;\
     display 'Reloaded tmux config.'
 
-# horizontal and vertical splits
+# Splits
+########
+
 unbind |
 bind | split-window -h
 unbind _
 bind _ split-window
 
-# Start window numbering at 1
-set -g base-index 1
+# Tile all
+unbind =
+bind = select-layout tiled
 
-
-###########################################################################
 # Mouse mode
-
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
+############
 
 # Toggle mouse on
 bind m \
@@ -41,3 +38,56 @@ bind M \
     set -g mouse-select-pane off \;\
     set -g mouse-select-window off \;\
     display 'Mouse: OFF'
+
+# Navigate panes like vim
+#########################
+
+unbind h
+bind h select-pane -L
+unbind j
+bind j select-pane -D
+unbind k
+bind k select-pane -U
+unbind l
+bind l select-pane -R
+
+# Closing panes, windows and sessions
+#####################################
+
+# close panes with w
+unbind w
+bind w kill-pane
+# close window with ctrl-w
+unbind C-w
+bind C-w kill-window
+
+# close sessions with q
+unbind q
+bind q confirm kill-session
+# close server with ctrl-q
+unbind C-q
+bind C-q confirm kill-server
+
+# Choose windows and sessions with tab and ~
+############################################
+
+unbind tab
+bind tab choose-window
+
+unbind `
+bind ` choose-session
+
+# Copy n paste
+##############
+
+# Use vim keybindings in copy mode
+setw -g mode-keys vi
+
+# Setup 'v' to begin selection as in Vim
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Update default binding of `Enter` to also use copy-pipe
+unbind -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+
