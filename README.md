@@ -29,7 +29,9 @@ This will setup all the symlinks and run all the `install.sh` scripts.
 
 ### sublime text 3
 
-For now, Sublime Text preferences and package installation is manual. Just copy sublime3/Preferences.sublime-settings to your User settings.
+Anything in `sublime3/User` will get symlinked to your Sublime Text User directory. 
+
+There is also an example Preferences file you can use.
 
 ### fonts
 

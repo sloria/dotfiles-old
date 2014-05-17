@@ -1,0 +1,27 @@
+<snippet>
+    <content><![CDATA[
+;(function (global, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else {
+        global.${1:MyModule}  = factory(jQuery);
+    }
+}(this, function(\$) {
+
+    function ${1:MyModule} () {
+
+    }
+
+    ${1:MyModule}.prototype = {
+
+    };
+
+    return ${1:MyModule};
+
+}));
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>modboiler</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.js</scope>
+</snippet>

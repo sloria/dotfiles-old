@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
@@ -43,8 +44,6 @@ for file in ${(M)config_files:#*/completion.zsh}
 do
   source $file
 done
-
-
 
 unset config_files
 
