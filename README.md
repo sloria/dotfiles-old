@@ -2,11 +2,12 @@
 
 My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 
-## neat features
+## a few neat features
 
 - zsh configured with [prezto](https://github.com/sorin-ionescu/prezto).
 - nice fonts for the terminal and coding.
 - iterm2 themes.
+- Mac Desktop Applications installed with [homebrew cask](https://github.com/caskroom/homebrew-cask)
 - pluggable. Fork this. Remove what you don't use. Configure what you do use.
 
 ## prerequisites: Install these first
@@ -26,6 +27,10 @@ script/bootstrap
 ```
 
 This will setup all the symlinks and run all the `install.sh` scripts.
+
+### homebrew and homebrew-cask
+
+Put any common packages and applications you want installed in `homebrew/Brewfile` and `homebrew-cask/Caskfile`. These will be installed when you run the bootstrap or `dot` scripts.
 
 ### sublime text 3
 
@@ -74,3 +79,5 @@ All configuration is done in `~/.dotfiles`. Files are separated into *topic* dir
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
 - **topic/install.sh**: Topic-specific installation script. These will execute when you run `script/bootstrap` or `script/install` or `dot`
+
+You can also put any secret stuff in `~/.localrc`. This file will be executed by `~/.zshrc`
