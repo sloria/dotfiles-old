@@ -4,10 +4,7 @@ install caskroom/cask/brew-cask
 # install common applications
 cask install google-chrome
 cask install firefox
-cask install dropbox
 cask install iterm2
-cask install flux
 cask install bettertouchtool
-cask install crashplan
 cask install caffeine
 
