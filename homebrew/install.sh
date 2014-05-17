@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 #
 # Homebrew
 #
@@ -13,7 +13,9 @@ then
 fi
 
 # Link the Brewfile
-ln -s $ZSH/homebrew/Brewfile ~/Brewfile
+if [[ ! -a ~/Brewfile ]]; then
+    ln -s $ZSH/homebrew/Brewfile ~/Brewfile
+fi
 
 # install dependencies in Brewfile
 brew bundle ~/Brewfile

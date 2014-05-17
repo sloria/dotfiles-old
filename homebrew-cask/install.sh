@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 #
 # Homebrew-cask
 #
@@ -6,7 +6,9 @@
 # using Homebrew cask
 
 # link Caskfile
-ln -s $ZSH/homebrew-cask/Caskfile ~/Caskfile
+if [[ ! -a ~/Brewfile ]]; then
+    ln -s $ZSH/homebrew/Brewfile ~/Brewfile
+fi
 
 # Execute the bundle command
 brew bundle ~/Caskfile

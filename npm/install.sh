@@ -1,4 +1,4 @@
-
+#!/usr/bin/env zsh
 # Make sure node/npm is installed
 brew install node
 
