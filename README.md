@@ -1,12 +1,19 @@
-# sloria does dotfiles
+# sloria's dotfiles
 
 My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 
-## prerequisites
+## neat features
+
+- zsh configured with [prezto](https://github.com/sorin-ionescu/prezto).
+- nice fonts for the terminal and coding.
+- iterm2 themes.
+- pluggable. Fork this. Remove what you don't use. Configure what you do use.
+
+## prerequisites: Install these first
 
 - homebrew
-- git
-- zsh
+- git (install with homebrew)
+- zsh (install with homebrew)
 
 ## install
 
@@ -18,11 +25,27 @@ cd ~/.dotfiles
 script/bootstrap
 ```
 
-### sublime text
+This will setup all the symlinks and run all the `install.sh` scripts.
+
+### sublime text 3
 
 For now, Sublime Text preferences and package installation is manual. Just copy sublime3/Preferences.sublime-settings to your User settings.
 
-## updating
+### fonts
+
+To install fonts on OSX, simply drag the `.ttf` files onto the Font Book application. 
+
+### python
+
+These dotfiles do *not* install python. This is because I prefer to use [Anaconda python](http://continuum.io/downloads). Installers are available here: http://continuum.io/downloads . I use the [miniconda](http://conda.pydata.org/miniconda.html#miniconda) distribution, but you can use the full installer if you like.
+
+The `python` topic in these dotfiles will correctly set up your path for anaconda.
+
+### iterm2 color themes
+
+To import an iterm themes, open your iTerm2 preferences and go to your Profiles settings. In the color tab, click the Load preset dropdown and choose "Import".
+
+## staying updated
 
 To handle installation and updates, run
 
@@ -30,9 +53,11 @@ To handle installation and updates, run
 dot
 ```
 
-Run this command occasionally to keep up to date.
+This will run all `topic/install.sh` scripts.
 
 ## components
+
+All configuration is done in `~/.dotfiles`. Files are separated into *topic* directories with a number of special files.
 
 - **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
   available everywhere.

@@ -21,6 +21,3 @@ chflags nohidden ~/Library
 
 # Set a really fast key repeat.
 defaults write NSGlobalDomain KeyRepeat -int 0
-
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
