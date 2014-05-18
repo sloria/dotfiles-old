@@ -11,10 +11,15 @@ bind r \
 # Splits
 ########
 
+# Use "|" and "_" for splitting window. Create new panes in current directory
 unbind |
-bind | split-window -h
+bind | split-window -h -c "#{pane_current_path}"
 unbind _
-bind _ split-window
+bind _ split-window -c "#{pane_current_path}"
+
+# Open new windows in current directory
+unbind c
+bind c new-window -c "#{pane_current_path}"
 
 # Tile all
 unbind =
