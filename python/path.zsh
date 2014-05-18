@@ -4,4 +4,4 @@
 # export PATH=~/anaconda/bin:$PATH
 
 ## Uncomment if you use miniconda
-export PATH=~/miniconda/bin:$PATH
+export PATH=$HOME/miniconda/bin:$PATH

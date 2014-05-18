@@ -8,3 +8,4 @@ cask install iterm2
 cask install bettertouchtool
 cask install caffeine
 
+cask cleanup

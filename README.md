@@ -16,52 +16,6 @@ My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 - git (install with homebrew)
 - zsh (install with homebrew)
 
-## install
-
-Run this:
-
-```sh
-git clone https://github.com/sloria/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-script/bootstrap
-```
-
-This will setup all the symlinks and run all the `install.sh` scripts.
-
-### homebrew and homebrew-cask
-
-Put any common packages and applications you want installed in `homebrew/Brewfile` and `homebrew-cask/Caskfile`. These will be installed when you run the bootstrap or `dot` scripts.
-
-### sublime text 3
-
-Anything in `sublime3/User` will get symlinked to your Sublime Text User directory. 
-
-There is also an example Preferences file you can use.
-
-### fonts
-
-To install fonts on OSX, simply drag the `.ttf` files onto the Font Book application. 
-
-### python
-
-These dotfiles do *not* install python. This is because I prefer to use [Anaconda python](http://continuum.io/downloads). Installers are available here: http://continuum.io/downloads . I use the [miniconda](http://conda.pydata.org/miniconda.html#miniconda) distribution, but you can use the full installer if you like.
-
-The `python` topic in these dotfiles will correctly set up your path for anaconda.
-
-### iterm2 color themes
-
-To import an iterm themes, open your iTerm2 preferences and go to your Profiles settings. In the color tab, click the Load preset dropdown and choose "Import".
-
-## staying updated
-
-To handle installation and updates, run
-
-```sh
-dot
-```
-
-This will run all `topic/install.sh` scripts.
-
 ## components
 
 All configuration is done in `~/.dotfiles`. Files are separated into *topic* directories with a number of special files.
@@ -81,3 +35,50 @@ All configuration is done in `~/.dotfiles`. Files are separated into *topic* dir
 - **topic/install.sh**: Topic-specific installation script. These will execute when you run `script/bootstrap` or `script/install` or `dot`
 
 You can also put any secret stuff in `~/.localrc`. This file will be executed by `~/.zshrc`
+
+### special notes
+
+**homebrew and homebrew-cask**
+
+Put any common packages and applications you want installed in `homebrew/Brewfile` and `homebrew-cask/Caskfile`. These will be installed when you run the bootstrap or `dot` scripts.
+
+**sublime text 3**
+
+Anything in `sublime3/User` will get symlinked to your Sublime Text User directory. 
+
+There is also an example Preferences file you can use.
+
+**fonts**
+
+To install fonts on OSX, simply drag the `.ttf` files onto the Font Book application. 
+
+**python**
+
+The `python` topic installs the [Anaconda Python distribution](https://store.continuum.io/cshop/anaconda/) using the [miniconda](http://conda.pydata.org/miniconda.html) installer. The installation is entirely self-contained, and lives at `~/miniconda`.
+
+**iterm2 color themes**
+
+To import an iterm themes, open your iTerm2 preferences and go to your Profiles settings. In the color tab, click the Load preset dropdown and choose "Import".
+
+## install
+
+Run this:
+
+```sh
+git clone https://github.com/sloria/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+script/bootstrap
+```
+
+This will setup all the symlinks and run all the `install.sh` scripts.
+
+## staying updated
+
+To handle installation and updates, run
+
+```sh
+dot
+```
+
+This will run all `topic/install.sh` scripts.
+
