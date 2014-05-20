@@ -3,5 +3,5 @@ DISABLE_CORRECTION="true"
 unsetopt correct
 unsetopt correct_all
 
-# Enable the z script
-. `brew --prefix`/etc/profile.d/z.sh
+# enable autojump
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh

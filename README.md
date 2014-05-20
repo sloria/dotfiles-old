@@ -7,8 +7,10 @@ My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 - zsh configured with [prezto](https://github.com/sorin-ionescu/prezto).
 - nice fonts for the terminal and coding.
 - iterm2 themes.
+- anaconda python
 - Mac Desktop Applications installed with [homebrew cask](https://github.com/caskroom/homebrew-cask)
-- pluggable. Fork this. Remove what you don't use. Configure what you do use.
+- a tmux.conf that's pretty neat
+- pluggable. Everything is optional. Fork this. Remove what you don't use. Configure what you do use.
 
 ## prerequisites: Install these first
 

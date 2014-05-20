@@ -4,7 +4,7 @@ update
 install zsh
 install git
 install tree
-install z
+install autojump
 install ruby
 
 cleanup

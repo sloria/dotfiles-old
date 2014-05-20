@@ -1,6 +1,16 @@
-# set prefix key
-unbind C-b
+# set prefix key to space
+unbind C-space
 set -g prefix C-space
+
+# Make cycling through panes really easy (hold ctrl and press space twice)
+unbind C-space
+bind C-space select-pane -t :.+
+
+# renumber windows upon closing
+set -g renumber-windows on
+
+# Use vim keybindings
+setw -g mode-keys vi
 
 # reload tmux config
 unbind r
@@ -8,21 +18,27 @@ bind r \
     source-file ~/.tmux.conf \;\
     display 'Reloaded tmux config.'
 
-# Splits
-########
+# create windows and panes in current directory
+unbind '"'
+bind '"' split-window -c "#{pane_current_path}"
 
-# Use "|" and "_" for splitting window. Create new panes in current directory
-unbind |
-bind | split-window -h -c "#{pane_current_path}"
-unbind _
-bind _ split-window -c "#{pane_current_path}"
+unbind %
+bind % split-window -h -c "#{pane_current_path}"
 
-# Open new windows in current directory
+# Use t for creating new panes, like tabs in OSX
+unbind t
+bind t split-window -h -c "#{pane_current_path}"
+
+unbind C-t
+bind C-t split-window -c "#{pane_current_path}"
+
 unbind c
 bind c new-window -c "#{pane_current_path}"
 
+# Layouts
+#########
+
 # Tile all
-unbind =
 bind = select-layout tiled
 
 # Mouse mode
@@ -44,25 +60,30 @@ bind M \
     set -g mouse-select-window off \;\
     display 'Mouse: OFF'
 
-# Navigate panes like vim
-#########################
+# Navigate panes
+################
 
-unbind h
+# Make cycling through panes really easy (hold ctrl and press space twice)
+bind C-space select-pane -t :.+
+
+# act like vim
 bind h select-pane -L
-unbind j
 bind j select-pane -D
-unbind k
 bind k select-pane -U
-unbind l
 bind l select-pane -R
+
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
 
 # Closing panes, windows and sessions
 #####################################
 
-# close panes with w
+# Using w for closing, like in  OSX
+# close panes
 unbind w
 bind w kill-pane
-# close window with ctrl-w
+# close window
 unbind C-w
 bind C-w kill-window
 
@@ -73,26 +94,15 @@ bind q confirm kill-session
 unbind C-q
 bind C-q confirm kill-server
 
-# Choose windows and sessions with tab and ~
-############################################
+# Choose windows and sessions with tab
+######################################
 
-unbind tab
 bind tab choose-window
 
-unbind `
-bind ` choose-session
-
-# Copy n paste
-##############
-
-# Use vim keybindings in copy mode
-setw -g mode-keys vi
+# Make copy-n-paste work on OSX
+###############################
 
 # Setup 'v' to begin selection as in Vim
 bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
-
-# Update default binding of `Enter` to also use copy-pipe
-unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
