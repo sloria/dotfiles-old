@@ -8,8 +8,9 @@ alias nt="nosetests"
 alias mn="python manage.py"
 
 # Conda environments
-alias createenv="conda create python=2 ipython pip -n "
-alias createenv3="conda create python=3 ipython pip -n "
+alias mkenv="conda create python=2 ipython pip -n "
+alias mkenv3="conda create python=3 ipython pip -n "
+alias lsenv="conda info -e"
 alias wo="source activate"
 alias de="source deactivate"
 
