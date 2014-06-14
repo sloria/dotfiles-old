@@ -5,3 +5,4 @@ alias dotfiles="cd ~/.dotfiles && subl $ZSH"
 alias e="subl ."
 
 alias cl="clear"
+alias c="clear"

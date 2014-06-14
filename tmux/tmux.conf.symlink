@@ -35,6 +35,8 @@ bind C-t split-window -c "#{pane_current_path}"
 unbind c
 bind c new-window -c "#{pane_current_path}"
 
+bind C-c new-window -c "#{pane_current_path}"
+
 # Layouts
 #########
 
