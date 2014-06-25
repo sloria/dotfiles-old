@@ -7,7 +7,7 @@
 
 # link Caskfile
 if [[ ! -a ~/Brewfile ]]; then
-    ln -s $ZSH/homebrew/Brewfile ~/Brewfile
+    ln -s $ZSH/homebrew/Caskfile ~/Caskfile
 fi
 
 # Execute the bundle command
