@@ -35,6 +35,7 @@ bind C-t split-window -c "#{pane_current_path}"
 unbind c
 bind c new-window -c "#{pane_current_path}"
 
+unbind C-c
 bind C-c new-window -c "#{pane_current_path}"
 
 # Layouts
@@ -79,8 +80,9 @@ bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE 
 bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 bind C-l send-keys 'C-l'
 
-bind -r C-h select-window -t :-
-bind -r C-l select-window -t :+
+# Cycle through windows with Ctrl-n and Ctrl-p
+bind -n C-n select-window -t :+
+bind -n C-p select-window -t :-
 
 
 # Closing panes, windows and sessions
