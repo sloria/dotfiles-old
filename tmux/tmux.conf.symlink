@@ -81,8 +81,11 @@ bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE 
 bind C-l send-keys 'C-l'
 
 # Cycle through windows with Ctrl-n and Ctrl-p
-bind -n C-n select-window -t :+
-bind -n C-p select-window -t :-
+bind l select-window -t :+
+bind h select-window -t :-
+
+# bind -n C-n select-window -t :+
+# bind -n C-p select-window -t :-
 
 
 # Closing panes, windows and sessions
