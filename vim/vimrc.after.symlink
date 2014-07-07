@@ -26,6 +26,8 @@ map <Leader>a :%y+<CR>
 let g:pymode_folding = 0
 let g:pymode_doc = 0
 let g:pymode_lint_cwindow = 0
+set completeopt=menu " prevent pymode from showing documentation on autocomplete
+                    " https://github.com/klen/python-mode/issues/384
 " Pytest
 nmap <silent><Leader>f <Esc>:Pytest file verbose<CR>
 nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
