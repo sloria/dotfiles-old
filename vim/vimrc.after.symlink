@@ -1,0 +1,25 @@
+" Need this for themes to work correctly
+set t_Co=256
+colorscheme Tomorrow-Night
+
+set autoindent
+set autoread " reload files when changed on disk, i.e. via `git checkout`
+set backspace=2 " Fix broken backspace in some setups
+set backupcopy=yes
+"set clipboard=unnamed
+set ignorecase " case-insensitive search
+set incsearch " search as you type
+
+" Enable basic mouse behavior such as resizing buffers.
+set mouse=a
+if exists('$TMUX') " Support resizing in tmux
+  set ttymouse=xterm2
+endif
+
+set wildmenu " show a navigable menu for tab completion
+" Quickly reload vimrc
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+nnoremap <leader>f :NERDTreeFind<CR>
+
+map <Leader>a :%y+<CR> 
