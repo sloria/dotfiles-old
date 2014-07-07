@@ -24,8 +24,9 @@ noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '
 map <Leader>a :%y+<CR> 
 " Turn off automatic folding in python-mode
 let g:pymode_folding = 0
-
+let g:pymode_doc = 0
+let g:pymode_lint_cwindow = 0
 " Pytest
-nmap <silent><Leader>f <Esc>:Pytest file<CR>
-nmap <silent><Leader>c <Esc>:Pytest class<CR>
-nmap <silent><Leader>m <Esc>:Pytest method<CR>
+nmap <silent><Leader>f <Esc>:Pytest file verbose<CR>
+nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
+nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
