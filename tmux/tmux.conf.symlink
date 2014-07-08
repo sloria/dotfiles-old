@@ -118,3 +118,5 @@ bind tab choose-window
 bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 
+# Make vim yanking work with OSX system clipboard
+set-option -g default-command "reattach-to-user-namespace -l zsh"
