@@ -1,3 +1,4 @@
+set encoding=utf-8
 " Need this for themes to work correctly
 set t_Co=256
 colorscheme Tomorrow-Night
@@ -6,7 +7,7 @@ set autoindent
 set autoread " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2 " Fix broken backspace in some setups
 set backupcopy=yes
-"set clipboard=unnamed
+set clipboard=unnamed
 set ignorecase " case-insensitive search
 set incsearch " search as you type
 
@@ -21,7 +22,7 @@ set wildmenu " show a navigable menu for tab completion
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 
-map <Leader>a :%y+<CR> 
+map <Leader>a :%y+<CR>
 " Turn off automatic folding in python-mode
 let g:pymode_folding = 0
 let g:pymode_doc = 0
@@ -32,3 +33,23 @@ set completeopt=menu " prevent pymode from showing documentation on autocomplete
 nmap <silent><Leader>f <Esc>:Pytest file verbose<CR>
 nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
 nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
+
+" Change cursor shape between insert and normal mode in iTerm2.app
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
+
+" Source the vimrc file after saving it
+" NOTE: Source vimrc.after instead of $MYVIMRC
+" because that is what janus uses
+if has("autocmd")
+  autocmd bufwritepost .vimrc.after source ~/.vimrc.after
+endif
+
+" Quickly edit vimrc.after
+nmap <leader>v :tabedit ~/.vimrc.after<CR>
+
+" Open Fugitive's status pane in a larger window
+"nmap <leader>gs :Gstatus<CR><C-w>20+
+set previewheight=25
