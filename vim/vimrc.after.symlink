@@ -53,3 +53,7 @@ nmap <leader>v :tabedit ~/.vimrc.after<CR>
 " Open Fugitive's status pane in a larger window
 "nmap <leader>gs :Gstatus<CR><C-w>20+
 set previewheight=25
+
+" Ctrlp: Index hidden files
+let g:ctrlp_show_hidden = 1
+
