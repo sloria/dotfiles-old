@@ -3,7 +3,6 @@ brew install macvim
 curl -Lo- https://bit.ly/janus-bootstrap | bash
 
 # Make sure that .janus directory exists
-if [ -d "$HOME/.janus"]; then
-  mkdir $HOME/.janus
+if [[ ! -a $HOME/.janus ]]; then
+    ln -s $ZSH/vim/janus $HOME/.janus
 fi
-
