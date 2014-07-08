@@ -1,11 +1,11 @@
 update
 
 # Common packages to install with brew
-install wget
+install autojump
 install zsh
+install wget
 install git
 install tree
-install autojump
 install ruby
 # A faster ack
 install ag
