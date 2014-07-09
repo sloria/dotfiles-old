@@ -84,3 +84,6 @@ dot
 
 This will run all `topic/install.sh` scripts.
 
+# TODO
+
+- Make these easily installable on linux

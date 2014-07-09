@@ -38,6 +38,22 @@ bind c new-window -c "#{pane_current_path}"
 unbind C-c
 bind C-c new-window -c "#{pane_current_path}"
 
+# Choose session
+unbind S
+bind S choose-session
+
+# Cycle windows with ctrl-shift left/right
+unbind -n C-S-Left
+bind-key -n C-S-Left select-window -t :-
+unbind -n C-S-Right
+bind-key -n C-S-Right select-window -t :+
+
+# Move windows with Prefix-left/right
+unbind Left
+bind-key Left swap-window -t -1
+unbind Right
+bind-key Right swap-window -t +1
+
 # Layouts
 #########
 
@@ -71,7 +87,10 @@ bind M \
 # Make cycling through panes really easy (hold ctrl and press space twice)
 bind C-space select-pane -t :.+
 
-# act like vim
+# use vim-like keys for splits and windows
+bind-key v split-window -h -c "#{pane_current_path}"
+bind-key s split-window -v -c "#{pane_current_path}"
+
 # smart pane switching with awareness of vim splits
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
 bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
@@ -80,13 +99,14 @@ bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE 
 bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
 bind C-l send-keys 'C-l'
 
-# Cycle through windows with Ctrl-n and Ctrl-p
+# Cycle through windows
 bind l select-window -t :+
 bind h select-window -t :-
 
 # bind -n C-n select-window -t :+
 # bind -n C-p select-window -t :-
-
+#bind-key -n C-Right select-window -t :+
+#bind-key -n C-Left select-window -t :-
 
 # Closing panes, windows and sessions
 #####################################

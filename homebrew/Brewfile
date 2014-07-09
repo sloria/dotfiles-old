@@ -9,5 +9,6 @@ install tree
 install ruby
 # A faster ack
 install ag
+install macvim
 
 cleanup
