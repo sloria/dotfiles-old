@@ -69,3 +69,6 @@ set previewheight=25
 "let g:ctrlp_show_hidden = 1
 
 nnoremap <leader>d :NERDTreeToggle<CR>
+
+" Open help in a new tab
+cabbrev h tab h

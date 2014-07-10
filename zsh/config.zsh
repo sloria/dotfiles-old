@@ -4,4 +4,8 @@ unsetopt correct
 unsetopt correct_all
 
 # enable autojump
-[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+unamestr=`uname -a`
+if [[ "$unamestr" == *Darwin* ]]
+then
+  [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+fi

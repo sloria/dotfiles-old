@@ -1,2 +1,8 @@
 #!/usr/bin/env zsh
-brew install autoenv
+if [ "$(uname -s)" == "Darwin" ]
+then
+  brew install autoenv
+else
+  pip install autoenv
+fi
+
