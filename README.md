@@ -17,6 +17,10 @@ My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 - homebrew
 - git (install with homebrew)
 - zsh (install with homebrew)
+- ruby
+- rake
+- python
+- pip
 
 ## components
 
