@@ -1,2 +1,6 @@
 #!/usr/bin/env zsh
-brew install hub
+unamestr=`uname -a`
+if [[ "$unamestr" == *Darwin* ]]
+then
+  brew install hub
+fi

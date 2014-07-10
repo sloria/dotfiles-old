@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-if [ "$(uname -s)" == "Darwin" ]
+unamestr=`uname -a`
+if [[ "$unamestr" == *Darwin* ]]
 then
   brew install autoenv
 else
