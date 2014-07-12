@@ -19,6 +19,8 @@ set incsearch " search as you type
 set wildignore+=log/**,node_modules/**,target/**,tmp/**,*.rbc/,.git/*,*/.hg/*,*/.svn/*
 set wildmenu " show a navigable menu for tab completion
 set wildmode=longest,list,full
+set cursorline  " have a line indicate cursor location
+set listchars=tab:▸\ ,trail:▫
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a

@@ -5,3 +5,5 @@ alias dotfiles="cd ~/.dotfiles && $EDITOR $ZSH"
 
 alias cl="clear"
 alias c="clear"
+
+alias pg='ps -ef | grep'
