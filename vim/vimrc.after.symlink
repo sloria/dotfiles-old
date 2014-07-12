@@ -35,6 +35,7 @@ map <Leader>a :%y+<CR>
 let g:pymode_folding = 0
 let g:pymode_doc = 0
 let g:pymode_lint_cwindow = 0
+let g:pymode_lint_ignore = "E501"
 set completeopt=menu " prevent pymode from showing documentation on autocomplete
                     " https://github.com/klen/python-mode/issues/384
 " Pytest
@@ -72,3 +73,11 @@ nnoremap <leader>d :NERDTreeToggle<CR>
 
 " Open help in a new tab
 cabbrev h tab h
+
+" Quickly traverse buffers
+
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
