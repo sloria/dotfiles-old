@@ -1,0 +1,3 @@
+[submodule "vim/janus/emmet-vim"]
+	path = vim/janus/emmet-vim
+	url = https://github.com/mattn/emmet-vim

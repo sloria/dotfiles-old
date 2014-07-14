@@ -16,9 +16,6 @@
 [submodule "vim-tmux-navigator"]
 	path = vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
-[submodule "vim-colors-pencil"]
-	path = vim-colors-pencil
-	url = https://github.com/reedes/vim-colors-pencil.git
 [submodule "jshint.vim"]
 	path = jshint.vim
 	url = https://github.com/walm/jshint.vim
