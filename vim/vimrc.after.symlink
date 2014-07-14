@@ -1,10 +1,12 @@
 " Sources:
 "   https://github.com/square/maximum-awesome/blob/master/vimrc
+"   and various StackOverflow answers
 
 
 set encoding=utf-8
 " Need this for themes to work correctly
 set t_Co=256
+"set background=dark
 colorscheme Tomorrow-Night
 
 set autoindent
@@ -22,28 +24,14 @@ set wildmode=longest,list,full
 set cursorline  " have a line indicate cursor location
 set listchars=tab:▸\ ,trail:▫
 
+" Open help in a new tab
+cabbrev h tab h
+
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
 if exists('$TMUX') " Support resizing in tmux
   set ttymouse=xterm2
 endif
-
-" Quickly reload vimrc
-noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
-" Quick copy whole file
-map <Leader>a :%y+<CR>
-" Turn off automatic folding in python-mode
-let g:pymode_folding = 0
-let g:pymode_doc = 0
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_ignore = "E501"
-set completeopt=menu " prevent pymode from showing documentation on autocomplete
-                    " https://github.com/klen/python-mode/issues/384
-" Pytest
-nmap <silent><Leader>f <Esc>:Pytest file verbose<CR>
-nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
-nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
 
 " Change cursor style when entering INSERT mode (works in tmux!)
 if exists('$TMUX')
@@ -53,6 +41,40 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+" Quickly reload vimrc
+noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" Quick copy whole file
+map <Leader>a :%y+<CR>
+
+map <Leader>t :CtrlPBuf<CR>
+
+" Pymode
+" Turn off automatic folding in python-mode
+let g:pymode_folding = 0
+let g:pymode_lint = 1
+let g:pymode_doc = 0
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_ignore = "E501,E127,E218,E265"
+set completeopt=menu " prevent pymode from showing documentation on autocomplete
+                    " https://github.com/klen/python-mode/issues/384
+
+" Syntastic
+" On by default, turn it off for html
+let g:syntastic_mode_map = { 'mode': 'active',
+ \ 'active_filetypes': [],
+ \ 'passive_filetypes': ['http', 'python'] } " let pymode do Python linting
+" Use flake8
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_python_flake8_args = '--ignore="E501,E127,E128"'
+
+
+" Pytest
+nmap <silent><Leader>f <Esc>:Pytest file verbose<CR>
+nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
+nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
+
 
 " Source the vimrc file after saving it
 " NOTE: Source vimrc.after instead of $MYVIMRC
@@ -65,16 +87,10 @@ endif
 nmap <leader>v :tabedit ~/.vimrc.after<CR>
 
 " Open Fugitive's status pane in a larger window
-"nmap <leader>gs :Gstatus<CR><C-w>20+
 set previewheight=25
-
-" Ctrlp: Index hidden files
-"let g:ctrlp_show_hidden = 1
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 
-" Open help in a new tab
-cabbrev h tab h
 
 " Quickly traverse buffers
 
@@ -96,3 +112,5 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
+
+let g:tagbar_autofocus = 1
