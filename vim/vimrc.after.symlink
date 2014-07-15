@@ -23,6 +23,8 @@ set wildmenu " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set cursorline  " have a line indicate cursor location
 set listchars=tab:▸\ ,trail:▫
+set foldmethod=manual
+
 
 " Open help in a new tab
 cabbrev h tab h
@@ -46,9 +48,11 @@ endif
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " Quick copy whole file
-map <Leader>a :%y+<CR>
+map <leader>a :%y+<CR>
 
-map <Leader>t :CtrlPBuf<CR>
+" Go to symbol with ,s
+map <leader>s :CtrlPBufTag<CR>
+
 
 " Pymode
 " Turn off automatic folding in python-mode
@@ -71,9 +75,10 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 
 " Pytest
-nmap <silent><Leader>f <Esc>:Pytest file verbose<CR>
+nmap <silent><Leader>F <Esc>:Pytest file verbose<CR>
 nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
 nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
+nmap <silent><Leader>tf <Esc>:Pytest function verbose<CR>
 
 
 " Source the vimrc file after saving it
@@ -91,14 +96,6 @@ set previewheight=25
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 
-
-" Quickly traverse buffers
-
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-
 set noswapfile
 if exists("+undofile")
 " undofile - This allows you to use undos after exiting and restarting
@@ -114,3 +111,6 @@ if exists("+undofile")
 endif
 
 let g:tagbar_autofocus = 1
+
+" Load the Gundo window
+map <leader>g :GundoToggle<CR>

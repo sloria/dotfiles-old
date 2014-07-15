@@ -3,5 +3,3 @@ let mapleader = ","
 call janus#disable_plugin('vroom')
 call janus#disable_plugin('buffergator')
 call janus#disable_plugin('narrowregion')
-call janus#disable_plugin('unimpaired')
-
