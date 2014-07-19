@@ -23,33 +23,82 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Snipmate dependencies
 Plugin 'alfredodeza/pytest.vim'
+nmap <silent><Leader>F <Esc>:Pytest file verbose<CR>
+nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
+nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
+nmap <silent><Leader>tf <Esc>:Pytest function verbose<CR>
+
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ervandew/supertab'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+
 Plugin 'kien/ctrlp.vim'
+" Go to symbol
+map <leader>r :CtrlPBufTag<CR>
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+" Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  nnoremap <leader>f :Ag<space>
+else
+  noremap <leader>f :Ack<space>
+endif
+
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'majutsushi/tagbar'
+" Open tagbar
+map <leader>rt :Tagbar<CR>
+let g:tagbar_autofocus = 1
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'mattn/emmet-vim'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rking/ag.vim'
+
 Plugin 'scrooloose/nerdtree'
+nnoremap <leader>d :NERDTreeToggle<CR>
+
 Plugin 'scrooloose/syntastic'
+let g:syntastic_mode_map = { 'mode': 'active',
+ \ 'active_filetypes': [],
+ \ 'passive_filetypes': ['http', 'python'] } " let pymode do Python linting
+
 Plugin 'sjl/gundo.vim'
+" Load the Gundo window
+map <leader>g :GundoToggle<CR>
+
+Plugin 'terryma/vim-expand-region'
+" Press v to select one char, v again to expand selection, v again to expand
+" on a paragraph
+vmap v <Plug>(expand_region_expand)
+" Use Ctrl-v to shrink region if you go to far
+vmap <C-v> <Plug>(expand_region_shrink)
+
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'walm/jshint.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
+
+" Github/Gist
+Plugin 'mattn/gist-vim'
+
+Plugin 'mmozuras/vim-github-comment'
+let g:github_user = 'sloria'
+
+Plugin 'tpope/vim-fugitive'
+map <leader>gs :Gstatus<CR>
+cabbrev git Git
 
 " Colors
 Plugin 'altercation/vim-colors-solarized'
@@ -57,9 +106,19 @@ Plugin 'chriskempson/vim-tomorrow-theme'
 
 " Syntax and languages
 
-" Plugin 'sheerun/vim-polyglot'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'klen/python-mode'
+" Turn off automatic folding in python-mode
+let g:pymode_folding = 0
+let g:pymode_lint = 1
+let g:pymode_doc = 0
+let g:pymode_run = 0  " turn off python run mode
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_ignore = "E501,E127,E218,E265"
+set completeopt=menu " prevent pymode from showing documentation on autocomplete
+                    " https://github.com/klen/python-mode/issues/384
+
+Plugin 'pangloss/vim-javascript'
 Plugin 'sophacles/vim-bundle-mako'
 
 " Load plugins
@@ -72,11 +131,10 @@ filetype plugin indent on    " required
 """ BASE CUSTOMIZATIONS """
 
 set encoding=utf-8
-" Need this for themes to work correctly
 syntax enable
-set t_Co=256
+set t_Co=256 " Must be 256 for Tomorrow theme to display correctly
 let g:solarized_termcolors=256
-set background=dark
+set background=light  " this only applies to the solarized theme, not tomorrow
 silent! colorscheme Tomorrow-Night
 
 set autoindent
@@ -94,7 +152,7 @@ set listchars=tab:▸\ ,trail:▫
 set foldmethod=manual
 set previewheight=25  " Larger preview height
 set number " Show line numbers on the sidebar.
-" Do not fold by default. But if, do it up to 3 levels.
+" Do not fold by default. But if you do, do it up to 3 levels.
 set foldmethod=indent
 set foldnestmax=3
 set nofoldenable
@@ -133,6 +191,9 @@ if exists("+undofile")
   set undofile
 endif
 
+" Stop that stupid window from popping up
+map q: :q
+
 " Change cursor style when entering INSERT mode (works in tmux!)
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -161,18 +222,8 @@ cnoremap w!! %!sudo tee > /dev/null %
 " Open help in a new tab
 cabbrev h tab h
 
-""" Syntax
-" fdoc is yaml
-autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-" md is markdown
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.md set spell
-
-
 " Quickly edit vimrc
 nmap <leader>, :tabedit ~/.vimrc<CR>
-
-""" BASE KEYMAPPINGS """
 
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>s :wq<CR>
@@ -185,70 +236,9 @@ nnoremap <Leader>v <C-w>v<C-w>w
 " Quick copy whole file
 map <leader>a :%y+<CR>
 
-""" PLUGIN CUSTOMIZATIONS """
-
-""" Ctrl-P customizations
-
-" Go to symbol
-map <leader>r :CtrlPBufTag<CR>
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-" Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  nnoremap <leader>f :Ag<space>
-else
-  noremap <leader>f :Ack<space>
-endif
-
-""" Pymode Customizations
-
-" Turn off automatic folding in python-mode
-let g:pymode_folding = 0
-let g:pymode_lint = 1
-let g:pymode_doc = 0
-let g:pymode_run = 0  " turn off python run mode
-let g:pymode_lint_cwindow = 0
-let g:pymode_lint_ignore = "E501,E127,E218,E265"
-set completeopt=menu " prevent pymode from showing documentation on autocomplete
-                    " https://github.com/klen/python-mode/issues/384
-
-""" Syntastic Customizations
-" On by default, turn it off for html
-let g:syntastic_mode_map = { 'mode': 'active',
- \ 'active_filetypes': [],
- \ 'passive_filetypes': ['http', 'python'] } " let pymode do Python linting
-" Use flake8
-"let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_python_flake8_args = '--ignore="E501,E127,E128"'
-
-
-""" Pytest Customizations
-nmap <silent><Leader>F <Esc>:Pytest file verbose<CR>
-nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
-nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
-nmap <silent><Leader>tf <Esc>:Pytest function verbose<CR>
-
-
-""" NERDTree Customizations
-
-nnoremap <leader>d :NERDTreeToggle<CR>
-
-
-" Load the Gundo window
-map <leader>g :GundoToggle<CR>
-
-""" Tagbar Customization
-
-" Open tagbar
-map <leader>rt :Tagbar<CR>
-let g:tagbar_autofocus = 1
-
-""" Fugitive
-
-map <leader>gs :Gstatus<CR>
-cabbrev git Git
+""" Syntax
+" fdoc is yaml
+autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+" md is markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md set spell
