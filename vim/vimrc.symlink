@@ -89,7 +89,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'walm/jshint.vim'
-
+Plugin 'mattn/webapi-vim' " needed by gist-vim and github-comment
 " Github/Gist
 Plugin 'mattn/gist-vim'
 
@@ -147,8 +147,11 @@ set incsearch " search as you type
 set wildmenu " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set cursorline  " have a line indicate cursor location
+
+" Show trailing whitespace
 set list
 set listchars=tab:▸\ ,trail:▫
+
 set foldmethod=manual
 set previewheight=25  " Larger preview height
 set number " Show line numbers on the sidebar.
