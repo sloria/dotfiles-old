@@ -1,0 +1,254 @@
+" Adapted from:
+"   https://github.com/square/maximum-awesome/blob/master/vimrc
+"   http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+"   https://github.com/sheerun/vimrc
+"   and various StackOverflow answers
+set nocompatible              " be iMproved, required for Vundle
+filetype off                  " required for Vundle
+
+" Spacebar is a much better leader than \ or ,
+let mapleader = "\<Space>"
+
+" Automatically source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+
+""""" PLUGINS """""
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Snipmate dependencies
+Plugin 'alfredodeza/pytest.vim'
+Plugin 'bling/vim-airline'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'ervandew/supertab'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'majutsushi/tagbar'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'mattn/emmet-vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'Raimondi/delimitMate'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'walm/jshint.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+" Colors
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/vim-tomorrow-theme'
+
+" Syntax and languages
+
+" Plugin 'sheerun/vim-polyglot'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'klen/python-mode'
+Plugin 'sophacles/vim-bundle-mako'
+
+" Load plugins
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+""" end plugins """
+
+
+""" BASE CUSTOMIZATIONS """
+
+set encoding=utf-8
+" Need this for themes to work correctly
+syntax enable
+set t_Co=256
+let g:solarized_termcolors=256
+set background=dark
+silent! colorscheme Tomorrow-Night
+
+set autoindent
+set autoread " reload files when changed on disk, i.e. via `git checkout`
+set backupcopy=yes
+" Make "yanks" work with system clipboard
+set clipboard=unnamed
+set ignorecase " case-insensitive search
+set incsearch " search as you type
+set wildmenu " show a navigable menu for tab completion
+set wildmode=longest,list,full
+set cursorline  " have a line indicate cursor location
+set list
+set listchars=tab:▸\ ,trail:▫
+set foldmethod=manual
+set previewheight=25  " Larger preview height
+set number " Show line numbers on the sidebar.
+" Do not fold by default. But if, do it up to 3 levels.
+set foldmethod=indent
+set foldnestmax=3
+set nofoldenable
+set noswapfile  " Prevent annoying swapfile dialogs
+
+" Set minimum window size to 79x5.
+set winwidth=79
+set winheight=5
+set winminheight=5
+
+" Patterns for expand(), ctrlp, etc. to ignore
+set wildignore+=log/**,node_modules/**,target/**,tmp/**,*.rbc/,.git/*,*/.hg/*,*/.svn/*
+" Disable output, vcs, archive, rails, temp and backup files.
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
+set wildignore+=*.swp,*~,._*
+set wildignore+=*.pyc
+" Enable basic mouse behavior such as resizing buffers.
+set mouse=a
+if exists('$TMUX') " Support resizing in tmux
+  set ttymouse=xterm2
+endif
+
+" Persistent undo
+if exists("+undofile")
+" undofile - This allows you to use undos after exiting and restarting
+" This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+" :help undo-persistence
+" This is only present in 7.3+
+  if isdirectory($HOME . '/.vim/undo') == 0
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+  set undodir=./.vim-undo//
+  set undodir+=~/.vim/undo//
+  set undofile
+endif
+
+" Change cursor style when entering INSERT mode (works in tmux!)
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Always focus on splited window.
+nnoremap <C-w>s <C-w>s<C-w>w
+nnoremap <C-w>v <C-w>v<C-w>w
+
+""" Search
+set hlsearch
+" Ignore case when searching.
+set ignorecase
+" Don't ignore case when search has capital letter
+set smartcase
+
+""" Shortcuts
+
+" in case you forgot to sudo
+cnoremap w!! %!sudo tee > /dev/null %
+
+" Open help in a new tab
+cabbrev h tab h
+
+""" Syntax
+" fdoc is yaml
+autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+" md is markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md set spell
+
+
+" Quickly edit vimrc
+nmap <leader>, :tabedit ~/.vimrc<CR>
+
+""" BASE KEYMAPPINGS """
+
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>s :wq<CR>
+" Unhighlight search
+nnoremap <Leader>l :nohlsearch<CR><C-L>
+
+" Quick split
+nnoremap <Leader>v <C-w>v<C-w>w
+
+" Quick copy whole file
+map <leader>a :%y+<CR>
+
+""" PLUGIN CUSTOMIZATIONS """
+
+""" Ctrl-P customizations
+
+" Go to symbol
+map <leader>r :CtrlPBufTag<CR>
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+" Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  nnoremap <leader>f :Ag<space>
+else
+  noremap <leader>f :Ack<space>
+endif
+
+""" Pymode Customizations
+
+" Turn off automatic folding in python-mode
+let g:pymode_folding = 0
+let g:pymode_lint = 1
+let g:pymode_doc = 0
+let g:pymode_run = 0  " turn off python run mode
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_ignore = "E501,E127,E218,E265"
+set completeopt=menu " prevent pymode from showing documentation on autocomplete
+                    " https://github.com/klen/python-mode/issues/384
+
+""" Syntastic Customizations
+" On by default, turn it off for html
+let g:syntastic_mode_map = { 'mode': 'active',
+ \ 'active_filetypes': [],
+ \ 'passive_filetypes': ['http', 'python'] } " let pymode do Python linting
+" Use flake8
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_python_flake8_args = '--ignore="E501,E127,E128"'
+
+
+""" Pytest Customizations
+nmap <silent><Leader>F <Esc>:Pytest file verbose<CR>
+nmap <silent><Leader>c <Esc>:Pytest class verbose<CR>
+nmap <silent><Leader>m <Esc>:Pytest method verbose<CR>
+nmap <silent><Leader>tf <Esc>:Pytest function verbose<CR>
+
+
+""" NERDTree Customizations
+
+nnoremap <leader>d :NERDTreeToggle<CR>
+
+
+" Load the Gundo window
+map <leader>g :GundoToggle<CR>
+
+""" Tagbar Customization
+
+" Open tagbar
+map <leader>rt :Tagbar<CR>
+let g:tagbar_autofocus = 1
+
+""" Fugitive
+
+map <leader>gs :Gstatus<CR>
+cabbrev git Git

@@ -1,9 +1,8 @@
 #!/usr/bin/env zsh
-# Install the janus vim distribution
-curl -Lo- https://bit.ly/janus-bootstrap | bash
 
-# Make sure that .janus directory exists
-if [[ ! -a $HOME/.janus ]]
-then
-    ln -s $ZSH/vim/janus $HOME/.janus
+if [[ ! -a ~/.vim/bundle/Vundle.vim ]]; then
+  # Install Vundle
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
+# Install all plugins
+vim +PluginInstall +qall
