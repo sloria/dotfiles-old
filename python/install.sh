@@ -18,7 +18,7 @@ then
   then
     echo "Installing miniconda python"
     # install miniconda for mac
-    wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-MacOSX-x86_64.sh $HOME/miniconda.sh
+    wget http://repo.continuum.io/miniconda/Miniconda3-3.5.5-MacOSX-x86_64.sh $HOME/miniconda.sh
     bash $HOME/miniconda.sh -b -p $HOME/miniconda
   else
     echo "conda already installed."
