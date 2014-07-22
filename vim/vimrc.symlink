@@ -42,10 +42,11 @@ map <leader>r :CtrlPBufTag<CR>
 if executable('ag')
 " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
   nnoremap <leader>f :Ag<space>
 else
   noremap <leader>f :Ack<space>
@@ -54,22 +55,26 @@ endif
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'majutsushi/tagbar'
 " Open tagbar
-map <leader>rt :Tagbar<CR>
+map <leader>\ :Tagbar<CR>
 let g:tagbar_autofocus = 1
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'mattn/emmet-vim'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rking/ag.vim'
 
 Plugin 'scrooloose/nerdtree'
 nnoremap <leader>d :NERDTreeToggle<CR>
+let g:NERDTreeRespectWildIgnore = 1
 
 Plugin 'scrooloose/syntastic'
 let g:syntastic_mode_map = { 'mode': 'active',
  \ 'active_filetypes': [],
- \ 'passive_filetypes': ['http', 'python'] } " let pymode do Python linting
+ \ 'passive_filetypes': ['html'] }
+let g:syntastic_python_checkers = ['flake8', 'python']
+" let g:syntastic_error_symbol = '>'
+" let g:syntastic_warning_symbol = '>'
+let g:syntastic_enable_signs = 1
 
 Plugin 'sjl/gundo.vim'
 " Load the Gundo window
@@ -84,6 +89,9 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-commentary'
+" Toggle comment with space-/
+nmap <leader>/ gcc
+vmap <leader>/ gc
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
@@ -110,7 +118,10 @@ Plugin 'chase/vim-ansible-yaml'
 Plugin 'klen/python-mode'
 " Turn off automatic folding in python-mode
 let g:pymode_folding = 0
-let g:pymode_lint = 1
+let g:pymode_lint = 0
+" don't use linter, we use syntastic for that
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_signs = 0
 let g:pymode_doc = 0
 let g:pymode_run = 0  " turn off python run mode
 let g:pymode_lint_cwindow = 0
@@ -120,6 +131,8 @@ set completeopt=menu " prevent pymode from showing documentation on autocomplete
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'sophacles/vim-bundle-mako'
+
+Plugin 'terryma/vim-multiple-cursors'
 
 " Load plugins
 call vundle#end()            " required
@@ -217,6 +230,12 @@ set ignorecase
 " Don't ignore case when search has capital letter
 set smartcase
 
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
 """ Shortcuts
 
 " in case you forgot to sudo
@@ -228,7 +247,9 @@ cabbrev h tab h
 " Quickly edit vimrc
 nmap <leader>, :tabedit ~/.vimrc<CR>
 
+" Quickly save
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
 nnoremap <Leader>s :wq<CR>
 " Unhighlight search
 nnoremap <Leader>l :nohlsearch<CR><C-L>
