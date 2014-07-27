@@ -129,11 +129,16 @@ let g:pymode_lint_cwindow = 0
 let g:pymode_lint_ignore = "E501,E127,E218,E265"
 set completeopt=menu " prevent pymode from showing documentation on autocomplete
                     " https://github.com/klen/python-mode/issues/384
-
+" restructuredText support
+Plugin 'Rykka/riv.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'sophacles/vim-bundle-mako'
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
 
 Plugin 'terryma/vim-multiple-cursors'
+" For previewing markdown, rst ,etc
+Plugin 'greyblake/vim-preview'
 
 " Load plugins
 call vundle#end()            " required
@@ -273,4 +278,3 @@ map <leader>a :%y+<CR>
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 " md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.md set spell
