@@ -7,8 +7,9 @@ install wget
 install git
 install tree
 install ruby
+install python3
 # A faster ack
 install ag
-install macvim
+install vim --with-python3
 
 cleanup
