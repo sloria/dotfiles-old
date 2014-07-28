@@ -117,7 +117,7 @@ Plugin 'mitsuhiko/vim-jinja'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'klen/python-mode'
 " Turn off automatic folding in python-mode
-" let g:pymode_python = 'python3'
+let g:pymode_python = 'python3'
 let g:pymode_folding = 0
 let g:pymode_lint = 0
 " don't use linter, we use syntastic for that
@@ -129,8 +129,6 @@ let g:pymode_lint_cwindow = 0
 let g:pymode_lint_ignore = "E501,E127,E218,E265"
 set completeopt=menu " prevent pymode from showing documentation on autocomplete
                     " https://github.com/klen/python-mode/issues/384
-" restructuredText support
-Plugin 'Rykka/riv.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'sophacles/vim-bundle-mako'
 Plugin 'plasticboy/vim-markdown'

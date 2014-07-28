@@ -10,6 +10,7 @@ My dotfiles, forked from [holman/dotfiles](https://github.com/holman/dotfiles).
 - anaconda python
 - Mac Desktop Applications installed with [homebrew cask](https://github.com/caskroom/homebrew-cask)
 - a tmux.conf that's pretty neat
+- vim with Vundle for plugin management. All configuration in a single file .vimrc
 - pluggable. Everything is optional. Fork this. Remove what you don't use. Configure what you do use.
 
 ## prerequisites: Install these first
