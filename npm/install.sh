@@ -2,7 +2,7 @@
 # Make sure node/npm is installed
 
 unamestr=`uname -a`
-if [["unamestr" == *Darwin* ]]
+if [["$unamestr" == *Darwin* ]]
 then
   brew install node
 fi

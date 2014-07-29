@@ -114,6 +114,7 @@ Plugin 'chriskempson/vim-tomorrow-theme'
 
 " Syntax and languages
 Plugin 'mitsuhiko/vim-jinja'
+Plugin 'stephpy/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'klen/python-mode'
 " Turn off automatic folding in python-mode
@@ -256,7 +257,7 @@ cnoremap w!! %!sudo tee > /dev/null %
 cabbrev h tab h
 
 " Quickly edit vimrc
-nmap <leader>, :tabedit ~/.vimrc<CR>
+nmap <leader>, :tabedit $MYVIMRC<CR>
 
 " Quickly save
 nnoremap <Leader>w :w<CR>
