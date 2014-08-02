@@ -2,6 +2,7 @@
 "   https://github.com/square/maximum-awesome/blob/master/vimrc
 "   http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 "   https://github.com/sheerun/vimrc
+"   https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
 "   and various StackOverflow answers
 set nocompatible              " be iMproved, required for Vundle
 filetype off                  " required for Vundle
@@ -72,7 +73,7 @@ let g:NERDTreeRespectWildIgnore = 1
 Plugin 'scrooloose/syntastic'
 let g:syntastic_mode_map = { 'mode': 'active',
  \ 'active_filetypes': [],
- \ 'passive_filetypes': ['html'] }
+ \ 'passive_filetypes': ['html', 'rst'] }
 let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_error_symbol = '>'
 " let g:syntastic_warning_symbol = '>'
@@ -102,6 +103,9 @@ Plugin 'walm/jshint.vim'
 Plugin 'mattn/webapi-vim' " needed by gist-vim and github-comment
 " Github/Gist
 Plugin 'mattn/gist-vim'
+" Make gists private by default
+let g:gist_post_private = 1
+
 Plugin 'tpope/vim-fugitive'
 map <leader>gs :Gstatus<CR>
 cabbrev git Git
@@ -109,7 +113,6 @@ cabbrev git Git
 " Colors
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
-
 " Syntax and languages
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'stephpy/vim-yaml'
@@ -142,6 +145,21 @@ Plugin 'terryma/vim-multiple-cursors'
 " For previewing markdown, rst ,etc
 Plugin 'greyblake/vim-preview'
 Plugin 'matchit.zip'
+Plugin 'duff/vim-scratch'
+" Open scratch buffer with space-tab
+command! ScratchToggle call ScratchToggle()
+
+function! ScratchToggle()
+    if exists("w:is_scratch_window")
+        unlet w:is_scratch_window
+        exec "q"
+    else
+        exec "normal! :Sscratch\<cr>\<C-W>L"
+        let w:is_scratch_window = 1
+    endif
+endfunction
+
+nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
 " Load plugins
 call vundle#end()            " required
@@ -223,6 +241,16 @@ if exists("+undofile")
   set undofile
 endif
 
+" Make sure Vim returns to the same line when you reopen a file.
+" Thanks, Amit
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
 " Stop that stupid window from popping up
 map q: :q
 
@@ -268,13 +296,26 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>s :wq<CR>
 " Unhighlight search
-nnoremap <Leader>l :nohlsearch<CR><C-L>
+nnoremap <Leader>n :nohlsearch<CR><C-L>
 
 " Quick split
 nnoremap <Leader>v <C-w>v<C-w>w
 
 " Quick copy whole file
 map <leader>a :%y+<CR>
+
+" Make D delete to end of line
+nnoremap D d$
+
+" Go to beginning/end of line
+" Easier to type
+noremap <leader>h ^
+noremap <leader>l $
+
+" Split line (sister to [J]oin lines)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
 
 """ Syntax
 " fdoc is yaml
