@@ -65,6 +65,8 @@ Plugin 'rking/ag.vim'
 
 Plugin 'scrooloose/nerdtree'
 nnoremap <leader>d :NERDTreeToggle<CR>
+" Single clicks open directories and files
+let g:NERDTreeMouseMode = 3
 let g:NERDTreeRespectWildIgnore = 1
 
 Plugin 'scrooloose/syntastic'
@@ -100,10 +102,6 @@ Plugin 'walm/jshint.vim'
 Plugin 'mattn/webapi-vim' " needed by gist-vim and github-comment
 " Github/Gist
 Plugin 'mattn/gist-vim'
-
-Plugin 'mmozuras/vim-github-comment'
-let g:github_user = 'sloria'
-
 Plugin 'tpope/vim-fugitive'
 map <leader>gs :Gstatus<CR>
 cabbrev git Git
@@ -117,8 +115,9 @@ Plugin 'mitsuhiko/vim-jinja'
 Plugin 'stephpy/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'klen/python-mode'
-" Turn off automatic folding in python-mode
+" Use Python 3
 let g:pymode_python = 'python3'
+" Turn off automatic folding in python-mode
 let g:pymode_folding = 0
 let g:pymode_lint = 0
 " don't use linter, we use syntastic for that
@@ -130,7 +129,11 @@ let g:pymode_lint_cwindow = 0
 let g:pymode_lint_ignore = "E501,E127,E218,E265"
 set completeopt=menu " prevent pymode from showing documentation on autocomplete
                     " https://github.com/klen/python-mode/issues/384
+" When using goto_definition, open in the current window instead of creating a
+" new window
+let g:pymode_rope_goto_definition_cmd = 'e'
 Plugin 'pangloss/vim-javascript'
+
 Plugin 'sophacles/vim-bundle-mako'
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
@@ -138,6 +141,7 @@ let g:vim_markdown_folding_disabled=1
 Plugin 'terryma/vim-multiple-cursors'
 " For previewing markdown, rst ,etc
 Plugin 'greyblake/vim-preview'
+Plugin 'matchit.zip'
 
 " Load plugins
 call vundle#end()            " required
