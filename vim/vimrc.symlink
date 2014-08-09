@@ -53,7 +53,6 @@ else
   noremap <leader>f :Ack<space>
 endif
 
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'majutsushi/tagbar'
 " Open tagbar
 map <leader>\ :Tagbar<CR>
@@ -80,9 +79,6 @@ let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_warning_symbol = '>'
 let g:syntastic_enable_signs = 0
 let g:syntastic_python_checker_args='--ignore=E501'
-Plugin 'sjl/gundo.vim'
-" Load the Gundo window
-map <leader>g :GundoToggle<CR>
 
 Plugin 'terryma/vim-expand-region'
 " Press v to select one char, v again to expand selection, v again to expand
@@ -194,9 +190,9 @@ set cursorline  " have a line indicate cursor location
 
 " Indents
 set expandtab " expand tabs by default (overloadable per file type later)
-set tabstop=2 " a tab is 2 spaces
-set softtabstop=2 " when hitting <BS>, pretend like a tab is removed, even if spaces
-set shiftwidth=2 " number of spaces to use for autoindenting
+set tabstop=4 " a tab is 4 spaces
+set softtabstop=4 " when hitting <BS>, pretend like a tab is removed, even if spaces
+set shiftwidth=4 " number of spaces to use for autoindenting
 set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 
 " Show trailing whitespace
@@ -321,9 +317,15 @@ noremap <leader>l $
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
+" Move vertically over wrapped lines
+nmap j gj
+nmap k gk
 
 """ Syntax
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 " md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+" For better commit messages
+autocmd Filetype gitcommit setlocal textwidth=72
