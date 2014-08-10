@@ -36,7 +36,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -208,7 +208,7 @@ set noswapfile  " Prevent annoying swapfile dialogs
 set t_Co=256 " Must be 256 for Tomorrow theme to display correctly
 " let g:solarized_termcolors=256
 set background=light  " this only applies to the solarized theme, not tomorrow
-silent! colorscheme Tomorrow-Night
+silent! colorscheme solarized
 
 " Show trailing whitespace
 set list
@@ -320,7 +320,6 @@ nnoremap <Leader>n :nohlsearch<CR><C-L>
 
 " Quick split
 nnoremap <Leader>v <C-w>v<C-w>w
-nnoremap <Leader>s <C-w>s<C-w>w
 
 " Quick copy whole file
 map <leader>a :%y+<CR>
