@@ -10,6 +10,8 @@ install ruby
 install python3
 # A faster ack
 install ag
+# Both terminal vim and macvim are nice
 install vim --with-python3
+install mvim --with-python3
 
 cleanup

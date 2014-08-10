@@ -31,7 +31,8 @@ nmap <silent><Leader>tf <Esc>:Pytest function verbose<CR>
 
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
@@ -119,7 +120,7 @@ Plugin 'stephpy/vim-yaml'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'klen/python-mode'
 " Use Python 3
-let g:pymode_python = 'python3'
+let g:pymode_python = 'python'
 " Turn off automatic folding in python-mode
 let g:pymode_folding = 0
 let g:pymode_lint = 0
@@ -173,8 +174,8 @@ filetype plugin indent on    " required
 set encoding=utf-8
 syntax enable
 set t_Co=256 " Must be 256 for Tomorrow theme to display correctly
-let g:solarized_termcolors=256
-set background=light  " this only applies to the solarized theme, not tomorrow
+" let g:solarized_termcolors=256
+set background=dark  " this only applies to the solarized theme, not tomorrow
 silent! colorscheme Tomorrow-Night
 
 set autoindent
@@ -329,3 +330,9 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 
 " For better commit messages
 autocmd Filetype gitcommit setlocal textwidth=72
+
+" GUI settings, e.g. MacVim
+set guifont=Ubuntu\ Mono:h14
+if has('gui_running')
+    set transparency=5
+endif
