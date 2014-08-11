@@ -36,10 +36,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plugin 'honza/vim-snippets'
 
 Plugin 'rking/ag.vim'
@@ -84,6 +82,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:syntastic_python_checkers = ['flake8', 'python']
 let g:syntastic_enable_signs = 0
 let g:syntastic_python_checker_args='--ignore=E501'
+let g:syntastic_javascript_checkers = ['jshint']
 
 Plugin 'terryma/vim-expand-region'
 " Press v to select one char, v again to expand selection, v again to expand
@@ -101,7 +100,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'walm/jshint.vim'
 Plugin 'mattn/webapi-vim' " needed by gist-vim and github-comment
 " Github/Gist
 Plugin 'mattn/gist-vim'
@@ -138,6 +136,8 @@ let g:pymode_run = 0
 let g:pymode_folding = 0
 " don't use linter, we use syntastic for that
 let g:pymode_lint = 0
+" Don't look for .ropeproject directories in parent directories
+let g:pymode_rope_lookup_project = 0
 set completeopt=menu " prevent pymode from showing documentation on autocomplete
                     " https://github.com/klen/python-mode/issues/384
 " When using goto_definition, open in the current window instead of creating a
@@ -149,6 +149,7 @@ Plugin 'sophacles/vim-bundle-mako'
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
+Plugin 'ZoomWin'
 Plugin 'terryma/vim-multiple-cursors'
 " For previewing markdown, rst ,etc
 Plugin 'greyblake/vim-preview'
@@ -191,7 +192,6 @@ set ignorecase " case-insensitive search
 set incsearch " search as you type
 set wildmenu " show a navigable menu for tab completion
 set wildmode=longest,list,full
-set cursorline  " have a line indicate cursor location
 
 " Indents
 set expandtab " expand tabs by default (overloadable per file type later)
@@ -208,7 +208,13 @@ set noswapfile  " Prevent annoying swapfile dialogs
 set t_Co=256 " Must be 256 for Tomorrow theme to display correctly
 " let g:solarized_termcolors=256
 set background=light  " this only applies to the solarized theme, not tomorrow
-silent! colorscheme solarized
+" May want to have different schemes for termvim vs gvim
+if has('gui_running')
+    silent! colorscheme Tomorrow-Night
+else
+    " termvim looks best with Tomorrow themes
+    silent! colorscheme Tomorrow-Night
+endif
 
 " Show trailing whitespace
 set list
@@ -218,6 +224,7 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+set cursorline  " have a line indicate cursor location
 set foldmethod=manual
 set previewheight=25  " Larger preview height
 set number " Show line numbers on the sidebar.
@@ -241,7 +248,7 @@ set wildignore+=*.swp,*~,._*
 set wildignore+=*.pyc
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
-set mousemodel=popup
+set mousemodel=popup " Right-click pops up a menu
 if exists('$TMUX') " Support resizing in tmux
   set ttymouse=xterm2
 endif
@@ -287,6 +294,7 @@ nnoremap <C-w>s <C-w>s<C-w>w
 nnoremap <C-w>v <C-w>v<C-w>w
 
 """ Search
+" Highlight search results
 set hlsearch
 " Ignore case when searching.
 set ignorecase
@@ -360,7 +368,7 @@ autocmd Filetype gitcommit setlocal textwidth=72
 set guifont=Ubuntu\ Mono:h14
 if has('gui_running')
     if has('mac')
-        set transparency=5
+        set transparency=7
         " Hide scrollbars in MacVim
         set guioptions-=T
         set guioptions-=r
